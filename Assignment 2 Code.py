@@ -30,9 +30,8 @@ def energy(beta, n, N): #n is the number of steps and N is the number of samples
     return np.mean(Hs), np.std(Hs) #this collects the mean of the results ensuring it is as accurate as possible
 
 def reweight(Beta1, Beta2, E1, P1):
-    P2_unweighted = np.sum(np.exp(-Beta2 * metropolis(Beta2, times)))
-    P2 = np.sum(np.exp(-Beta1 * metropolis(Beta2, times) - (Beta2 - Beta1) * E1))
-    E2 = np.sum(metropolis(Beta2, times) * np.exp(-Beta2 * metropolis(Beta2, times))) / P2_unweighted
+    P2 = np.sum(np.exp(-Beta1 * metropolis(Beta2, times)))
+    E2 = np.sum(metropolis(Beta2, times) * np.exp(-Beta2 * metropolis(Beta2, times))) / P2
     return E1 * np.exp((Beta1 - Beta2) * E1) / P1 * np.exp((Beta2 - Beta1) * E2) / P2
  #this is the reweighting procedure using the formula provided
 
